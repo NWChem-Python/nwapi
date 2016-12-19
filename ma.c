@@ -2429,8 +2429,12 @@ public Boolean MA_init(
         return MA_FALSE;
 #endif /* VERIFY */
 
-    printf("DEFAULT_TOTAL_STACK %d, DEFAULT_TOTAL_STACK %d\n", DEFAULT_TOTAL_STACK, DEFAULT_TOTAL_STACK);
+    nominal_stack = -1;
+    nominal_heap = -1;
+
     printf("nominal_heap %d, nominal_stack %d\n", nominal_heap, nominal_stack);
+    printf("DEFAULT_TOTAL_STACK %lu, DEFAULT_TOTAL_STACK %lu\n", DEFAULT_TOTAL_STACK, DEFAULT_TOTAL_STACK);
+
 
 
     /* preinitialize if necessary */
@@ -2459,13 +2463,18 @@ public Boolean MA_init(
     /* convert datatype to internal (index-suitable) value */
     datatype = mt_import(datatype);
 
+    printf("", nominal_heap);
+
     /* compute # of bytes in heap */
     if (nominal_heap < 0)
     {
         heap_bytes = DEFAULT_TOTAL_HEAP;
+        printf("A\n");
     }
     else
     {
+    	        printf("B\n");
+
         heap_bytes = (nominal_heap * ma_sizeof[datatype]) +
             (DEFAULT_REQUESTS_HEAP * max_block_overhead(datatype));
     }
@@ -2483,7 +2492,7 @@ public Boolean MA_init(
     }
     stack_bytes = (unsigned long)round((long)stack_bytes, (ulongi)ALIGNMENT);
 
-    printf("heap_bytes %d, stack_bytes %d\n", heap_bytes, stack_bytes);
+    printf("heap_bytes %lu, stack_bytes %lu\n", heap_bytes, stack_bytes);
 
     /* segment consists of heap and stack */
     total_bytes = heap_bytes + stack_bytes;
@@ -2506,10 +2515,10 @@ public Boolean MA_init(
     else
 #endif
 
- 	    printf("total_bytes %d, should be %d\n", total_bytes, heap_bytes + stack_bytes);
+ 	    printf("total_bytes %lu, should be %d\n", total_bytes, heap_bytes + stack_bytes);
 
         ma_segment = (Pointer)bytealloc(total_bytes);
- 	    printf("total_bytes %d, should be %d\n", total_bytes, heap_bytes + stack_bytes);
+ 	    printf("total_bytes %d, should be %lu\n", total_bytes, heap_bytes + stack_bytes);
 
 
     if (ma_segment == (Pointer)NULL)

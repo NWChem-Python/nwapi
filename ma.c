@@ -2469,7 +2469,6 @@ public Boolean MA_init(
         heap_bytes = (nominal_heap * ma_sizeof[datatype]) +
             (DEFAULT_REQUESTS_HEAP * max_block_overhead(datatype));
     }
-    printf("%d\n",heap_bytes);
     heap_bytes = (unsigned long)round((long)heap_bytes, (ulongi)ALIGNMENT);
 
     /* compute # of bytes in stack */
@@ -2488,6 +2487,10 @@ public Boolean MA_init(
 
     /* segment consists of heap and stack */
     total_bytes = heap_bytes + stack_bytes;
+
+    printf("total_bytes %d, should be %d\n", total_bytes, heap_bytes + stack_bytes);
+
+
 #ifdef NOUSE_MMAP
     /* disable memory mapped malloc */
     mallopt(M_MMAP_MAX, 0);
@@ -2502,7 +2505,13 @@ public Boolean MA_init(
     }
     else
 #endif
+
+ 	    printf("total_bytes %d, should be %d\n", total_bytes, heap_bytes + stack_bytes);
+
         ma_segment = (Pointer)bytealloc(total_bytes);
+ 	    printf("total_bytes %d, should be %d\n", total_bytes, heap_bytes + stack_bytes);
+
+
     if (ma_segment == (Pointer)NULL)
     {
         (void)sprintf(ma_ebuf,

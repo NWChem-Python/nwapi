@@ -55,8 +55,8 @@
 #define DONTCARE	(Integer)0
 
 /* default total # of bytes */
-#define DEFAULT_TOTAL_HEAP	524288	/* 2^19 */
-#define DEFAULT_TOTAL_STACK	524288	/* 2^19 */
+#define DEFAULT_TOTAL_HEAP	131072	/* 2^19 */
+#define DEFAULT_TOTAL_STACK	131072	/* 2^19 */
 
 /* estimate of max # of outstanding allocation requests */
 #define DEFAULT_REQUESTS_HEAP	1

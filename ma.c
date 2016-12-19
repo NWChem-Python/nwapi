@@ -2429,6 +2429,10 @@ public Boolean MA_init(
         return MA_FALSE;
 #endif /* VERIFY */
 
+    /* These are hardcoded upstream, but I'm hardcoding them here too because of a weird bug with integer types. - AMV 12.19.16 */
+    nominal_heap = -1;
+    nominal_stack = -1;
+
     /* preinitialize if necessary */
     ma_preinitialize("MA_init");
 

@@ -1,4 +1,4 @@
-This code is meant to faciliate interaction with nwchem runtime database file including pythin bindings.
+This code is meant to faciliate interaction with nwchem runtime database file including python bindings.
 
 To build on Mac:
 make -f makefile.mac
